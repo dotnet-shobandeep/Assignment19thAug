@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="julDotNetBatch2020Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DeptTable">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <Property Name="DeptName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmployeeTb1" Relationship="Self.FK_EmployeeTb1_DeptTable" FromRole="DeptTable" ToRole="EmployeeTb1" />
+  </EntityType>
+  <EntityType Name="EmployeeTb1">
+    <Key>
+      <PropertyRef Name="empId" />
+    </Key>
+    <Property Name="empId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="empName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="empSal" Type="Double" />
+    <Property Name="deptid" Type="Int32" />
+    <NavigationProperty Name="DeptTable" Relationship="Self.FK_EmployeeTb1_DeptTable" FromRole="EmployeeTb1" ToRole="DeptTable" />
+  </EntityType>
+  <Association Name="FK_EmployeeTb1_DeptTable">
+    <End Role="DeptTable" Type="Self.DeptTable" Multiplicity="0..1" />
+    <End Role="EmployeeTb1" Type="Self.EmployeeTb1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeptTable">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="EmployeeTb1">
+        <PropertyRef Name="deptid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="julDotNetBatch2020Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DeptTables" EntityType="Self.DeptTable" />
+    <EntitySet Name="EmployeeTb1" EntityType="Self.EmployeeTb1" />
+    <AssociationSet Name="FK_EmployeeTb1_DeptTable" Association="Self.FK_EmployeeTb1_DeptTable">
+      <End Role="DeptTable" EntitySet="DeptTables" />
+      <End Role="EmployeeTb1" EntitySet="EmployeeTb1" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

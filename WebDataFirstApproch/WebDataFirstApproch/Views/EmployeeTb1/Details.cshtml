@@ -1,0 +1,42 @@
+﻿@model WebDataFirstApproch.EmployeeTb1
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployeeTb1</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.empName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.empSal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empSal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeptTable.DeptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeptTable.DeptName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.empId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

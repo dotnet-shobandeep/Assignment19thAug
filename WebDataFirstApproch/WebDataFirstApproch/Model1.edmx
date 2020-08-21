@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="julDotNetBatch2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DeptTable">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" Nullable="false" />
+          <Property Name="DeptName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="EmployeeTb1">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empName" Type="varchar" MaxLength="20" />
+          <Property Name="empSal" Type="float" />
+          <Property Name="deptid" Type="int" />
+        </EntityType>
+        <Association Name="FK_EmployeeTb1_DeptTable">
+          <End Role="DeptTable" Type="Self.DeptTable" Multiplicity="0..1" />
+          <End Role="EmployeeTb1" Type="Self.EmployeeTb1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeptTable">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="EmployeeTb1">
+              <PropertyRef Name="deptid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="julDotNetBatch2020ModelStoreContainer">
+          <EntitySet Name="DeptTable" EntityType="Self.DeptTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeTb1" EntityType="Self.EmployeeTb1" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeeTb1_DeptTable" Association="Self.FK_EmployeeTb1_DeptTable">
+            <End Role="DeptTable" EntitySet="DeptTable" />
+            <End Role="EmployeeTb1" EntitySet="EmployeeTb1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="julDotNetBatch2020Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DeptTable">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" />
+          <Property Name="DeptName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmployeeTb1" Relationship="Self.FK_EmployeeTb1_DeptTable" FromRole="DeptTable" ToRole="EmployeeTb1" />
+        </EntityType>
+        <EntityType Name="EmployeeTb1">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="empSal" Type="Double" />
+          <Property Name="deptid" Type="Int32" />
+          <NavigationProperty Name="DeptTable" Relationship="Self.FK_EmployeeTb1_DeptTable" FromRole="EmployeeTb1" ToRole="DeptTable" />
+        </EntityType>
+        <Association Name="FK_EmployeeTb1_DeptTable">
+          <End Role="DeptTable" Type="Self.DeptTable" Multiplicity="0..1" />
+          <End Role="EmployeeTb1" Type="Self.EmployeeTb1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeptTable">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="EmployeeTb1">
+              <PropertyRef Name="deptid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="julDotNetBatch2020Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DeptTables" EntityType="Self.DeptTable" />
+          <EntitySet Name="EmployeeTb1" EntityType="Self.EmployeeTb1" />
+          <AssociationSet Name="FK_EmployeeTb1_DeptTable" Association="Self.FK_EmployeeTb1_DeptTable">
+            <End Role="DeptTable" EntitySet="DeptTables" />
+            <End Role="EmployeeTb1" EntitySet="EmployeeTb1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="julDotNetBatch2020ModelStoreContainer" CdmEntityContainer="julDotNetBatch2020Entities">
+          <EntitySetMapping Name="DeptTables">
+            <EntityTypeMapping TypeName="julDotNetBatch2020Model.DeptTable">
+              <MappingFragment StoreEntitySet="DeptTable">
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTb1">
+            <EntityTypeMapping TypeName="julDotNetBatch2020Model.EmployeeTb1">
+              <MappingFragment StoreEntitySet="EmployeeTb1">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="empSal" ColumnName="empSal" />
+                <ScalarProperty Name="deptid" ColumnName="deptid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

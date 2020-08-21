@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="julDotNetBatch2020ModelStoreContainer" CdmEntityContainer="julDotNetBatch2020Entities">
+    <EntitySetMapping Name="DeptTables">
+      <EntityTypeMapping TypeName="julDotNetBatch2020Model.DeptTable">
+        <MappingFragment StoreEntitySet="DeptTable">
+          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeTb1">
+      <EntityTypeMapping TypeName="julDotNetBatch2020Model.EmployeeTb1">
+        <MappingFragment StoreEntitySet="EmployeeTb1">
+          <ScalarProperty Name="empId" ColumnName="empId" />
+          <ScalarProperty Name="empName" ColumnName="empName" />
+          <ScalarProperty Name="empSal" ColumnName="empSal" />
+          <ScalarProperty Name="deptid" ColumnName="deptid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
